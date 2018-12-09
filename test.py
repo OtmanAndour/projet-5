@@ -1,24 +1,35 @@
 #import requests
-#import json
-#
+from constants import *
+import openfoodfacts
+import json
+import mysql.connector
+
 #var=requests.get("https://fr-en.openfoodfacts.org/category/pizzas/1.json")
 #var=json.loads(var.text)
 #for product in var["products"]:
 #    print (json.dumps(product,indent=2))
 
-from watson_developer_cloud import TextToSpeechV1
+#products = openfoodfacts.products.get_by_country("France", page=22463)
+#print(json.dumps(products, indent=2))
 
-text_to_speech = TextToSpeechV1(
-    iam_apikey='ZZbg4XfO6aA1lh2U1SopkxbR5Ti2oo3VHZXt-zjdbV84',
-    url='https://gateway-syd.watsonplatform.net/text-to-speech/api'
-)
+products = openfoodfacts.products.get_by_country("France", page=5)
+#print(json.dumps(products, indent=2))
+for product in products:
+    for key in product_data.keys():
+                try:
+                    return product[product_data[key]]
+                except KeyError:
+                    print("error!")
 
-escanor_bio = open("escanor_bio.txt","r")
-
-with open('escanor_bio.wav', 'wb') as audio_file:
-    audio_file.write(
-        text_to_speech.synthesize(
-            escanor_bio.read(),
-            'audio/wav',
-            'en-US_MichaelVoice'
-        ).get_result().content)
+#mydb = mysql.connector.connect(
+#  host=connect["host"],
+#  user=connect["user"],
+#  passwd=connect["passwd"],
+#  database=connect["database"]
+#)
+#
+#mycursor = mydb.cursor()
+#
+#mycursor.execute("SHOW TABLES")
+#for x in mycursor:
+#    print(x)
