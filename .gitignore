@@ -1,4 +1,4 @@
 env/
-test
-fichier
+/test.py
+/fichier.json
 openfoodfacts-python/
