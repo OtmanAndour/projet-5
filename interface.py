@@ -8,6 +8,7 @@ from constants import *
 
 class Interface:
     """Main class containing all the methods to run the program"""
+    
     def connection(self):
         """Connects to mysql"""
         self.mydb = mysql.connector.connect(
